@@ -5,16 +5,38 @@ node_js:
   - "1.8"
   - "2.5"
   - "3.3"
+<<<<<<< HEAD
   - "4.6"
   - "5.12"
   - "6.9"
   - "7.0"
+=======
+  - "4.8"
+  - "5.12"
+  - "6.11"
+  - "7.10"
+  - "8.4"
+>>>>>>> 3b023c6282237307204f4ff450cfb3a8cb2656ed
 sudo: false
 cache:
   directories:
     - node_modules
 before_install:
+<<<<<<< HEAD
   # Update Node.js modules
   - "test ! -d node_modules || npm prune"
   - "test ! -d node_modules || npm rebuild"
 script: "npm run-script test-ci"
+=======
+  # Skip updating shrinkwrap / lock
+  - "npm config set shrinkwrap false"
+
+  # Setup Node.js version-specific dependencies
+  - "test $(echo $TRAVIS_NODE_VERSION | cut -d. -f1) -ge 4 || npm rm --save-dev $(grep -E '\"eslint\\S*\"' package.json | cut -d'\"' -f2)"
+  # Update Node.js modules
+  - "test ! -d node_modules || npm prune"
+  - "test ! -d node_modules || npm rebuild"
+script:
+  - "npm run test-ci"
+  - "test -z $(npm -ps ls eslint) || npm run lint"
+>>>>>>> 3b023c6282237307204f4ff450cfb3a8cb2656ed
