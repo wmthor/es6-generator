@@ -150,6 +150,133 @@ describe('express(1)', function () {
     })
   });
 
+  describe('--es6', function () {
+    var ctx = setupTestEnvironment(this.fullTitle())
+
+    it('should create basic app', function (done) {
+      runRaw(ctx.dir, ['--es6'], function (err, code, stdout, stderr) {
+        if (err) return done(err);
+        ctx.files = parseCreatedFiles(stdout, ctx.dir)
+        ctx.stderr = stderr
+        ctx.stdout = stdout
+        assert.equal(ctx.files.length, 17)
+        done();
+      });
+    });
+
+    it('should print jade view warning', function () {
+      assert.equal(ctx.stderr, "\n  warning: the default view engine will not be jade in future releases\n  warning: use `--view=jade' or `--help' for additional options\n\n")
+    })
+
+    it('should provide debug instructions', function () {
+      assert.ok(/DEBUG=express\(1\)---es6:\* (?:\& )?npm start/.test(ctx.stdout))
+    });
+
+    it('should have basic files', function () {
+      assert.notEqual(ctx.files.indexOf('bin/www'), -1)
+      assert.notEqual(ctx.files.indexOf('app.js'), -1)
+      assert.notEqual(ctx.files.indexOf('package.json'), -1)
+    });
+
+    it('should have jade templates', function () {
+      assert.notEqual(ctx.files.indexOf('views/error.jade'), -1)
+      assert.notEqual(ctx.files.indexOf('views/index.jade'), -1)
+      assert.notEqual(ctx.files.indexOf('views/layout.jade'), -1)
+    });
+
+    it('should have a package.json file', function () {
+      var file = path.resolve(ctx.dir, 'package.json');
+      var contents = fs.readFileSync(file, 'utf8');
+      assert.equal(contents, '{\n'
+        + '  "name": "express(1)---es6",\n'
+        + '  "version": "0.0.0",\n'
+        + '  "private": true,\n'
+        + '  "scripts": {\n'
+        + '    "start": "node ./bin/www"\n'
+        + '  },\n'
+        + '  "dependencies": {\n'
+        + '    "body-parser": "~1.15.2",\n'
+        + '    "cookie-parser": "~1.4.3",\n'
+        + '    "debug": "~2.2.0",\n'
+        + '    "express": "~4.14.0",\n'
+        + '    "jade": "~1.11.0",\n'
+        + '    "morgan": "~1.7.0",\n'
+        + '    "serve-favicon": "~2.3.0"\n'
+        + '  }\n'
+        + '}\n');
+    });
+
+    it('should have installable dependencies', function (done) {
+      this.timeout(30000);
+      npmInstall(ctx.dir, done);
+    });
+
+    it('should export an express app from app.js', function () {
+      var file = path.resolve(ctx.dir, 'app.js');
+      var app = require(file);
+      assert.equal(typeof app, 'function');
+      assert.equal(typeof app.handle, 'function');
+    });
+
+    it('should respond to HTTP request', function (done) {
+      var file = path.resolve(ctx.dir, 'app.js');
+      var app = require(file);
+
+      request(app)
+      .get('/')
+      .expect(200, /<title>Express<\/title>/, done);
+    });
+
+    it('should generate a 404', function (done) {
+      var file = path.resolve(ctx.dir, 'app.js');
+      var app = require(file);
+
+      request(app)
+      .get('/does_not_exist')
+      .expect(404, /<h1>Not Found<\/h1>/, done);
+    });
+
+    describe('when directory contains spaces', function () {
+      var ctx = setupTestEnvironment('foo bar (BAZ!)')
+
+      it('should create basic app', function (done) {
+        run(ctx.dir, [], function (err, output) {
+          if (err) return done(err)
+          assert.equal(parseCreatedFiles(output, ctx.dir).length, 17)
+          done()
+        })
+      })
+
+      it('should have a valid npm package name', function () {
+        var file = path.resolve(ctx.dir, 'package.json')
+        var contents = fs.readFileSync(file, 'utf8')
+        var name = JSON.parse(contents).name
+        assert.ok(validateNpmName(name).validForNewPackages)
+        assert.equal(name, 'foo-bar-(baz!)')
+      })
+    })
+
+    describe('when directory is not a valid name', function () {
+      var ctx = setupTestEnvironment('_')
+
+      it('should create basic app', function (done) {
+        run(ctx.dir, [], function (err, output) {
+          if (err) return done(err)
+          assert.equal(parseCreatedFiles(output, ctx.dir).length, 17)
+          done()
+        })
+      })
+
+      it('should default to name "hello-world"', function () {
+        var file = path.resolve(ctx.dir, 'package.json')
+        var contents = fs.readFileSync(file, 'utf8')
+        var name = JSON.parse(contents).name
+        assert.ok(validateNpmName(name).validForNewPackages)
+        assert.equal(name, 'hello-world')
+      })
+    })
+  });
+
   describe('(unknown args)', function () {
     var ctx = setupTestEnvironment(this.fullTitle())
 
