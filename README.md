@@ -42,6 +42,7 @@ This generator can also be further configured with the following command line fl
 
     -h, --help          output usage information
         --version       output the version number
+        --es6           add ECMAScript 6 (ES2015) support
     -e, --ejs           add ejs engine support
         --hbs           add handlebars engine support
         --pug           add pug engine support
