@@ -48,6 +48,7 @@ program
   .name('express')
   .version(version, '    --version')
   .usage('[options] [dir]')
+  .option('    --es6', 'add ECMAScript 6 (ES2015) support')
   .option('-e, --ejs', 'add ejs engine support', renamedOption('--ejs', '--view=ejs'))
   .option('    --pug', 'add pug engine support', renamedOption('--pug', '--view=pug'))
   .option('    --hbs', 'add handlebars engine support', renamedOption('--hbs', '--view=hbs'))
@@ -144,8 +145,14 @@ function createApplication (name, path) {
   }
 
   // JavaScript
-  var app = loadTemplate('js/app.js')
-  var www = loadTemplate('js/www')
+  var jsPath = 'js/'
+  
+  if (program.es6) {
+    jsPath += 'es6/';
+  }
+
+  var app = loadTemplate(jsPath + 'app.js');
+  var www = loadTemplate(jsPath + 'www');
 
   // App name
   www.locals.name = name
@@ -181,8 +188,8 @@ function createApplication (name, path) {
     })
 
     mkdir(path + '/routes', function () {
-      copyTemplate('js/routes/index.js', path + '/routes/index.js')
-      copyTemplate('js/routes/users.js', path + '/routes/users.js')
+      copyTemplate(jsPath + 'routes/index.js', path + '/routes/index.js')
+      copyTemplate(jsPath + 'routes/users.js', path + '/routes/users.js')
       complete()
     })
 

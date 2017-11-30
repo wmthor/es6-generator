@@ -1,7 +1,4 @@
 node_modules/
 temp/
 npm-debug.log
-<<<<<<< HEAD
-=======
 package-lock.json
->>>>>>> 3b023c6282237307204f4ff450cfb3a8cb2656ed
