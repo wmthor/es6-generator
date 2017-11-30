@@ -1,8 +1,14 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
 const app = require('../app');
 const debug = require('debug')('{name}:server');
 const http = require('http');
 
-const normalizePort = function norm(val) {
+const normalizePort = (val) => {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {
@@ -21,11 +27,11 @@ const normalizePort = function norm(val) {
 /**
  * Set port.
  */
+
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-
-const onError = function handleError(error) {
+const handleError = (error) => {
   if (error.syscall !== 'listen') {
     throw error;
   }
@@ -52,9 +58,10 @@ const onError = function handleError(error) {
 /**
  * Create HTTP server.
  */
+
 const server = http.createServer(app);
 
-const onListening = function listen() {
+const listen = () => {
   const addr = server.address();
   const bind = typeof addr === 'string'
     ? `pipe ${addr}`
@@ -65,6 +72,7 @@ const onListening = function listen() {
 /**
  * Listen on provided port, on all network interfaces.
  */
+
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.on('error', handleError);
+server.on('listening', listen);
