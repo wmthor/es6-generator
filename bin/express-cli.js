@@ -146,13 +146,13 @@ function createApplication (name, path) {
 
   // JavaScript
   var jsPath = 'js/'
-  
+
   if (program.es6) {
-    jsPath += 'es6/';
+    jsPath += 'es6/'
   }
 
-  var app = loadTemplate(jsPath + 'app.js');
-  var www = loadTemplate(jsPath + 'www');
+  var app = loadTemplate(jsPath + 'app.js')
+  var www = loadTemplate(jsPath + 'www')
 
   // App name
   www.locals.name = name
