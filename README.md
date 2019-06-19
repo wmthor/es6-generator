@@ -11,7 +11,10 @@
 ## Installation
 
 ```sh
-$ npm install -g express-generator
+$ git clone git@github.com:wmthor/es6-generator.git
+$ cd es6-generator
+$ npm install
+$ cd ..
 ```
 
 ## Quick Start
@@ -21,7 +24,7 @@ The quickest way to get started with express is to utilize the executable `expre
 Create the app:
 
 ```bash
-$ express --view=hbs /tmp/foo && cd /tmp/foo
+$ node es6-generator/bin/express-cli.js --view=pug --es6 my_project_name && cd my_project_name
 ```
 
 Install dependencies:
