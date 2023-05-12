@@ -1,6 +1,8 @@
 [![Express Logo](https://i.cloudup.com/zfY6lL7eFa-3000x3000.png)](http://expressjs.com/)
 
-[Express'](https://www.npmjs.com/package/express) application generator.
+Fork of original [Express'](https://www.npmjs.com/package/express) application generator. Template kept up to date with:
+- Support for ES6
+- Latest package versions with security updates
 
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
