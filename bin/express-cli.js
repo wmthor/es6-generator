@@ -323,13 +323,13 @@ function createApplication (name, path) {
         pkg.dependencies['less-middleware'] = '~3.1.0'
         break
       case 'compass':
-        pkg.dependencies['node-compass'] = '0.2.4'
+        pkg.dependencies['node-compass'] = '~0.2.4'
         break
       case 'stylus':
-        pkg.dependencies['stylus'] = '0.59.0'
+        pkg.dependencies['stylus'] = '~0.59.0'
         break
       case 'sass':
-        pkg.dependencies['node-sass-middleware'] = '1.0.1'
+        pkg.dependencies['node-sass-middleware'] = '~1.0.1'
         break
     }
 
