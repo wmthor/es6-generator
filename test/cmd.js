@@ -64,19 +64,19 @@ describe('express(1)', function () {
       var contents = fs.readFileSync(file, 'utf8')
       assert.equal(contents, '{\n' +
         '  "name": "express(1)-(no-args)",\n' +
-        '  "version": "0.0.0",\n' +
+        '  "version": "0.0.1",\n' +
         '  "private": true,\n' +
         '  "scripts": {\n' +
         '    "start": "node ./bin/www"\n' +
         '  },\n' +
         '  "dependencies": {\n' +
-        '    "body-parser": "~1.18.2",\n' +
-        '    "cookie-parser": "~1.4.3",\n' +
-        '    "debug": "~2.6.9",\n' +
-        '    "express": "~4.15.5",\n' +
+        '    "body-parser": "~1.20.2",\n' +
+        '    "cookie-parser": "~1.4.6",\n' +
+        '    "debug": "~4.3.4",\n' +
+        '    "express": "~4.18.2",\n' +
         '    "jade": "~1.11.0",\n' +
-        '    "morgan": "~1.9.0",\n' +
-        '    "serve-favicon": "~2.4.5"\n' +
+        '    "morgan": "~1.10.0",\n' +
+        '    "serve-favicon": "~2.5.0"\n' +
         '  }\n' +
         '}\n')
     })
@@ -231,19 +231,19 @@ describe('express(1)', function () {
       var contents = fs.readFileSync(file, 'utf8')
       assert.equal(contents, '{\n' +
         '  "name": "express(1)---es6",\n' +
-        '  "version": "0.0.0",\n' +
+        '  "version": "0.0.1",\n' +
         '  "private": true,\n' +
         '  "scripts": {\n' +
         '    "start": "node ./bin/www"\n' +
         '  },\n' +
         '  "dependencies": {\n' +
-        '    "body-parser": "~1.18.2",\n' +
-        '    "cookie-parser": "~1.4.3",\n' +
-        '    "debug": "~2.6.9",\n' +
-        '    "express": "~4.15.5",\n' +
+        '    "body-parser": "~1.20.2",\n' +
+        '    "cookie-parser": "~1.4.6",\n' +
+        '    "debug": "~4.3.4",\n' +
+        '    "express": "~4.18.2",\n' +
         '    "jade": "~1.11.0",\n' +
-        '    "morgan": "~1.9.0",\n' +
-        '    "serve-favicon": "~2.4.5"\n' +
+        '    "morgan": "~1.10.0",\n' +
+        '    "serve-favicon": "~2.5.0"\n' +
         '  }\n' +
         '}\n')
     })

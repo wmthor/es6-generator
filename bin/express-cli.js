@@ -275,18 +275,18 @@ function createApplication (name, path) {
     // package.json
     var pkg = {
       name: name,
-      version: '0.0.0',
+      version: '0.0.1',
       private: true,
       scripts: {
         start: 'node ./bin/www'
       },
       dependencies: {
-        'body-parser': '~1.18.2',
-        'cookie-parser': '~1.4.3',
-        'debug': '~2.6.9',
-        'express': '~4.15.5',
-        'morgan': '~1.9.0',
-        'serve-favicon': '~2.4.5'
+        'body-parser': '~1.20.2',
+        'cookie-parser': '~1.4.6',
+        'debug': '~4.3.4',
+        'express': '~4.18.2',
+        'morgan': '~1.10.0',
+        'serve-favicon': '~2.5.0'
       }
     }
 
@@ -298,38 +298,38 @@ function createApplication (name, path) {
         pkg.dependencies['jade'] = '~1.11.0'
         break
       case 'ejs':
-        pkg.dependencies['ejs'] = '~2.5.7'
+        pkg.dependencies['ejs'] = '~3.1.19'
         break
       case 'hjs':
         pkg.dependencies['hjs'] = '~0.0.6'
         break
       case 'hbs':
-        pkg.dependencies['hbs'] = '~4.0.1'
+        pkg.dependencies['hbs'] = '~4.2.0'
         break
       case 'pug':
-        pkg.dependencies['pug'] = '2.0.0-beta11'
+        pkg.dependencies['pug'] = '~3.0.2'
         break
       case 'twig':
-        pkg.dependencies['twig'] = '~0.10.3'
+        pkg.dependencies['twig'] = '~1.16.0'
         break
       case 'vash':
-        pkg.dependencies['vash'] = '~0.12.2'
+        pkg.dependencies['vash'] = '~0.13.0'
         break
     }
 
     // CSS Engine support
     switch (program.css) {
       case 'less':
-        pkg.dependencies['less-middleware'] = '~2.2.1'
+        pkg.dependencies['less-middleware'] = '~3.1.0'
         break
       case 'compass':
-        pkg.dependencies['node-compass'] = '0.2.3'
+        pkg.dependencies['node-compass'] = '0.2.4'
         break
       case 'stylus':
-        pkg.dependencies['stylus'] = '0.54.5'
+        pkg.dependencies['stylus'] = '0.59.0'
         break
       case 'sass':
-        pkg.dependencies['node-sass-middleware'] = '0.9.8'
+        pkg.dependencies['node-sass-middleware'] = '1.0.1'
         break
     }
 
